@@ -5,11 +5,15 @@ from pyrogram.errors import FloodWait
 import requests 
 from bot import Bot
 from config import ADMINS, OWNER_ID, CHANNEL_ID, DISABLE_CHANNEL_BUTTON
-from helper_func import encode
+from helper_func import encode, get_message_id
 
 @Bot.on_message(filters.private & filters.command(['upload']) & ~filters.command(['users','broadcast','files','file','start']))
 async def channel_post(client: Client, message: Message):
     id = message.from_user.id
+    try:
+        first_message = await client.ask(text = f"HÃY GỬI CHO TÔI:\n💬 Tin nhắn\n📽️ Video\n 🖼️Hình ảnh\n 🗂️ File 🔊 Âm thanh (audio)\nmà bạn cần lưu trữ", chat_id = message.from_user.id)
+    except:
+        return
     reply_text = await message.reply_text("<b>Vui lòng chờ...!</b>", quote = True)
     try:
         post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
