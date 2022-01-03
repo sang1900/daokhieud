@@ -8,12 +8,6 @@ from config import ADMINS, OWNER_ID, CHANNEL_ID, DISABLE_CHANNEL_BUTTON
 from helper_func import encode, get_message_id
 
 @Bot.on_message(filters.private & ~filters.command(['start','users','broadcast','batch','genlink']))
-"""
-async def get_post(client: Client, message: Message):
-    try:
-        first_message = await client.ask(text = f"<b>HÃY GỬI CHO TÔI:\n💬 Tin nhắn\n📽️ Video\n🖼️ Hình ảnh\n🗂️ File \n🔊 Âm thanh (audio)\nmà bạn muốn lưu trữ</b>", chat_id = message.from_user.id)
-    except:
-        return"""
 async def channel_post(client: Client, message: Message):
     id = message.from_user.id
     reply_text = await message.reply_text("<b>Vui lòng chờ...!</b>", quote = True)
